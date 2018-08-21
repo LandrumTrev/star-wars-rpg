@@ -1,8 +1,10 @@
 // Star Wars RPG jQuery game
 // aka System Lord
 
+$(document).ready(function () {
 
-    // TEMPORARILY PLACE VARIABLE INITIALIZATIONS OUTSIDE jQUERY
+    // START JQUERY JS:
+
 
     // INITIALIZE GAME PLAY VARIABLES
 
@@ -30,14 +32,6 @@
     let $victoryMessage = "You have conquered all other worlds in your system. Game Over.";
 
     let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
-
-
-
-$(document).ready(function () {
-
-    // START JQUERY JS:
-
-
 
 
 
