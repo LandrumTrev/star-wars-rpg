@@ -6,7 +6,7 @@
 
 // INITIALIZE ARRAY OF CHARACTER OBJECTS
 
-let planetsArray = [
+let $planetsArray = [
 
     {
         name: "ARAZIUS",
@@ -101,8 +101,6 @@ let $victoryMessage = "You are the lord of your star system. Game Over.";
 
 let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
 
-// variable to represent your chosen planet object
-let $hero;
 
 
 
@@ -121,36 +119,55 @@ $(document).ready(function () {
     // when this planets container is clicked on
     $("#ARAZIUS").click(function (event) {
         // then make that planet the $hero
-        $hero = planetsArray[0];
+        $hero = $planetsArray[0];
     });
 
     // when a queued planets class box is clicked
-    $('.char_box').click(function() {
-        
+    $('.char_box').click(function () {
+
         // loop through all objects in planetArray
-        for (let i = 0; i < planetsArray.length; i++) {
+        for (let i = 0; i < $planetsArray.length; i++) {
 
             // define a variable $pNom for each looped object's .name
-            const $pNom = planetsArray[i].name;
+            const $pNom = $planetsArray[i].name;
 
-            // and when the ID of element clicked matches a .name of array object
-            if ($pNom === this.id) {
+            // and IF the ID of element clicked matches a .name of array object
+            // this identifies the particular element that has been clicked on
+            if ($pNom === this.id && $planetsArray[i].status !== "hero") {
 
-                // set that object's .status property to "hero"
-                planetsArray[i].status = "hero";
-                // and make the whole object the value of the $hero variable
-                $hero = planetsArray[i];
-                // and .hide THIS (the element clicked with class="char_box")
-                $(this).hide().attr('id');
-                // and put .name, .hp, and photo of $hero object into YOUR html divs
-                $("#your_hp").text($hero.hp);
-                $("#your_name").text($hero.name);
-                $("#your_photo").attr('src', $hero.photo);
+                    // if any planetArray[i] DOES === "hero", then all others clicked on are set to "enemy"
+                    // set that object's .status property to "enemy"
+                    $planetsArray[i].status = "enemy";
+                    // and make the whole object the value of the $enemy variable
+                    let $enemy = $planetsArray[i];
+                    // and .hide THIS (the element clicked with class="char_box")
+                    $(this).hide().attr('id');
+                    // and put .name, .hp, and photo of $hero object into ENEMY html divs
+                    $("#enemy_hp").text($enemy.hp);
+                    $("#enemy_name").text($enemy.name);
+                    $("#enemy_photo").attr('src', $enemy.photo);
 
-                // and console.log to confirm everything is working
-                console.log( $hero );
+                    // and console.log to confirm everything is working
+                    console.log($enemy);
 
-            }
+                } else {
+
+                    // set that object's .status property to "hero"
+                    $planetsArray[i].status = "hero";
+                    // and make the whole object the value of the $hero variable
+                    let $hero = $planetsArray[i];
+                    // and .hide THIS (the element clicked with class="char_box")
+                    $(this).hide().attr('id');
+                    // and put .name, .hp, and photo of $hero object into YOUR html divs
+                    $("#your_hp").text($hero.hp);
+                    $("#your_name").text($hero.name);
+                    $("#your_photo").attr('src', $hero.photo);
+
+                    // and console.log to confirm everything is working
+                    console.log($hero);
+
+                }
+
         }
 
 
@@ -166,7 +183,7 @@ $(document).ready(function () {
 
 
 
-        
+
 
     });
 
@@ -180,8 +197,8 @@ $(document).ready(function () {
 
 
 
-// END EVENT LISTENER TO LISTEN FOR KEY PRESSES AND CALL PLAY() FUNCTION
+    // END EVENT LISTENER TO LISTEN FOR KEY PRESSES AND CALL PLAY() FUNCTION
 
 
-// END JQUERY JS
+    // END JQUERY JS
 });
