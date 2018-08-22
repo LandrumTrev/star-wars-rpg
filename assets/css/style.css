@@ -148,11 +148,11 @@
 /* ID of top large planet (enemy) name+hp box container */
 #enemy_tag {
     box-sizing: border-box;
-    width: 200px;
+    width: 170px;
     font-family: 'system';
     position: absolute;
     bottom: 135px;
-    right: 60px;
+    right: 75px;
     opacity: .6;
     background-color: #444;
     border: 1px solid white;
@@ -164,11 +164,11 @@
 /* ID of bottom large planet (you) name+hp box container */
 #your_tag {
     box-sizing: border-box;
-    width: 200px;
+    width: 170px;
     font-family: 'system';
     position: absolute;
     bottom: 135px;
-    right: 60px;
+    right: 75px;
     opacity: .6;
     background-color: #444;
     border: 1px solid white;
@@ -180,11 +180,14 @@
 /* ID of top (enemy) large planets name */
 #enemy_name {
     text-align: left;
+    padding: 1px 0px 2px 0px;
 }
 
 /* ID of bottom (you) large planets name */
 #your_name {
     text-align: left;
+    padding: 1px 0px 2px 0px;
+
 }
 
 /* ID of top (enemy) large planet health points */
@@ -192,7 +195,7 @@
     text-align: left;
     position: absolute;
     right: 0px;
-    padding-left: 5px;
+    padding: 1px 0px 1px 6px;
     background-color: red;
 }
 
@@ -201,7 +204,7 @@
     text-align: left;
     position: absolute;
     right: 0px;
-    padding: 0px 0px 0px 5px;
+    padding: 1px 0px 1px 6px;
     background-color: red;
 }
 
@@ -235,4 +238,35 @@
     /* margin: 10px; */
 }
 
+/* class of tag box for small planets in queue */
+.char_tag {
+    /* margin: 0 auto; */
+    /* box-sizing: border-box; */
+    /* width: 80px; */
+    font-family: 'system';
+    font-size: .5rem;
+    letter-spacing: .1rem;
+    position: relative;
+    bottom: 55px;
+    /* right: -5px; */
+    opacity: .6;
+    background-color: #444;
+    border: 1px solid white;
+    color: white;
+    padding: 0px 0px 0px 4px;
+}
+
+/* class of small planets name formatting */
+.char_name {
+    text-align: left;
+    padding: 2px 0px 1px 0px;
+
+}
+
+/* class of small planets health points formatting */
+.char_hp {
+    float: right;
+    padding: 0px 0px 0px 3px;
+    background-color: red;
+}
 /* START THE RIGHT SIDE COLUMN PLANET CONTAINER QUEUE */
