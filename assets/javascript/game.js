@@ -124,20 +124,24 @@ $(document).ready(function () {
         $hero = planetsArray[0];
     });
 
-    // when a queued planets class is clicked
+    // when a queued planets class box is clicked
     $('.char_box').click(function() {
         
-        // write it's ID to the console to test
-        // console.log( this.id );
-
+        // loop through all objects in planetArray
         for (let i = 0; i < planetsArray.length; i++) {
 
-            const element = planetsArray[i].name;
+            // define a variable $pNom for each looped object's .name
+            const $pNom = planetsArray[i].name;
 
-            if (element === this.id) {
+            // IF it finds the object in planetsArray that matches the ID clicked
+            if ($pNom === this.id) {
 
                 planetsArray[i].status = "hero";
                 $hero = planetsArray[i];
+                $(this).hide().attr('id');
+
+
+
                 console.log( $hero );
 
             }
@@ -152,7 +156,7 @@ $(document).ready(function () {
 
 
 
-        
+
 
 
 
