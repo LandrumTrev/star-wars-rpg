@@ -182,8 +182,9 @@
 
 /* ID of top (enemy) large planet health points */
 #enemy_hp {
-    text-align: left;
+    /* text-align: left; */
     position: absolute;
+    bottom: 0px;
     right: 0px;
     padding: 1px 0px 1px 6px;
     background-color: red;
@@ -191,8 +192,9 @@
 
 /* ID of bottom (you) large planet health points */
 #your_hp {
-    text-align: left;
+    /* text-align: left; */
     position: absolute;
+    bottom: 0px;
     right: 0px;
     padding: 1px 0px 1px 6px;
     background-color: red;

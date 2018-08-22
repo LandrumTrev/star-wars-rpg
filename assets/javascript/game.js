@@ -14,7 +14,7 @@ let planetsArray = [
         ap: 15,
         cap: 15,
         status: "",
-        photo: "<img src='assets/images/arazius.png'>"
+        photo: 'assets/images/arazius.png'
     },
 
     {
@@ -23,7 +23,7 @@ let planetsArray = [
         ap: 25,
         cap: 25,
         status: "",
-        photo: "<img src='assets/images/iridir.png'>"
+        photo: 'assets/images/iridir.png'
     },
 
     {
@@ -32,7 +32,7 @@ let planetsArray = [
         ap: 12,
         cap: 12,
         status: "",
-        photo: "<img src='assets/images/kikinho.png'>"
+        photo: 'assets/images/kikinho.png'
     },
 
     {
@@ -41,7 +41,7 @@ let planetsArray = [
         ap: 20,
         cap: 20,
         status: "",
-        photo: "<img src='assets/images/orlopia.png'>"
+        photo: 'assets/images/orlopia.png'
     },
 
     {
@@ -50,7 +50,7 @@ let planetsArray = [
         ap: 10,
         cap: 10,
         status: "",
-        photo: "<img src='assets/images/ragen.png'>"
+        photo: 'assets/images/ragen.png'
     },
 
     {
@@ -59,7 +59,7 @@ let planetsArray = [
         ap: 15,
         cap: 15,
         status: "",
-        photo: "<img src='assets/images/sirith.png'>"
+        photo: 'assets/images/sirith.png'
     },
 
     {
@@ -68,7 +68,7 @@ let planetsArray = [
         ap: 20,
         cap: 20,
         status: "",
-        photo: "<img src='assets/images/trilope.png'>"
+        photo: 'assets/images/trilope.png'
     },
 
 ];
@@ -133,15 +133,21 @@ $(document).ready(function () {
             // define a variable $pNom for each looped object's .name
             const $pNom = planetsArray[i].name;
 
-            // IF it finds the object in planetsArray that matches the ID clicked
+            // and when the ID of element clicked matches a .name of array object
             if ($pNom === this.id) {
 
+                // set that object's .status property to "hero"
                 planetsArray[i].status = "hero";
+                // and make the whole object the value of the $hero variable
                 $hero = planetsArray[i];
+                // and .hide THIS (the element clicked with class="char_box")
                 $(this).hide().attr('id');
+                // and put .name, .hp, and photo of $hero object into YOUR html divs
+                $("#your_hp").text($hero.hp);
+                $("#your_name").text($hero.name);
+                $("#your_photo").attr('src', $hero.photo);
 
-
-
+                // and console.log to confirm everything is working
                 console.log( $hero );
 
             }
