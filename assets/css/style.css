@@ -34,7 +34,6 @@
     height: 710px;
     max-width: 405px;
     /* background-color: aliceblue; */
-    /* background: url(/assets/images/starfield.jpg); */
     background-size: cover;
 }
 
@@ -43,12 +42,8 @@
 /* START THE GAME NAME TITLE BOX */
 
 #title_box {
-    /* text-align: center; */
     font-family: system;
-    /* width: 100%; */
     height: 40px;
-    /* background-blend-mode: multiply; */
-    /* background-color: azure; */
 }
 
 #title_box h1 {
@@ -62,12 +57,9 @@
 }
 
 #title_box h1 span {
-    /* text-align: center; */
     color: #ccc;
     font-weight: 100;
     font-size: 1.4rem;
-    /* letter-spacing: 1.6rem; */
-    /* padding: 20px 0 0 0; */
 }
 
 /* END THE GAME NAME TITLE BOX */
@@ -75,18 +67,16 @@
 /* START THE MESSAGE BOX */
 
 #message_box {
-    /* width: 100%; */
     height: 50px;
-    /* background-color: rgb(255, 255, 255); */
 }
 
-#message_box p {
+#message_text {
     font-family: system;
     letter-spacing: .05rem;
     line-height: 1.1rem;
     text-align: center;
     font-size: .8rem;
-    /* padding: 4px; */
+    padding-right: 12px;
     color: #bbb;
     text-shadow: 2px 2px 2px #222;
 }
