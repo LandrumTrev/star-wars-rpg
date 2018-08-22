@@ -1,3 +1,5 @@
+/* CSS FOR SYSTEM LORD GAME, aka Star Wars RPG assignment */
+
 /* START FONTS */
 
 @font-face {
@@ -17,6 +19,8 @@
 
 /* END FONTS */
 
+/* START THE MAIN GAME CONTAINERS */
+
 #container {
     width: 100vw;
     height: 100vh;
@@ -34,6 +38,10 @@
     background-size: cover;
 }
 
+/* END THE MAIN GAME CONTAINERS */
+
+/* START THE GAME NAME TITLE BOX */
+
 #title_box {
     /* text-align: center; */
     font-family: system;
@@ -48,10 +56,9 @@
     color: #999;
     font-weight: 100;
     font-size: 1.4rem;
-    letter-spacing: 1.4rem;
-    padding: 18px 0 0 20px;
+    letter-spacing: 1.2rem;
+    padding: 18px 0 0 0px;
     text-shadow: 2px 2px 2px #222;
-
 }
 
 #title_box h1 span {
@@ -62,6 +69,10 @@
     /* letter-spacing: 1.6rem; */
     /* padding: 20px 0 0 0; */
 }
+
+/* END THE GAME NAME TITLE BOX */
+
+/* START THE MESSAGE BOX */
 
 #message_box {
     /* width: 100%; */
@@ -80,28 +91,9 @@
     text-shadow: 2px 2px 2px #222;
 }
 
-#char_bin {
-    float: right;
-    /* background-color: brown; */
-    width: 90px;
-    height: 630px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
+/* END THE MESSAGE BOX */
 
-.char_box {
-    box-sizing: border-box;
-    /* background-color: #222; */
-    /* border: .5px solid #222; */
-    width: 90px;
-    height: 90px;
-}
-
-.character {
-    width: 100%;
-    /* margin: 10px; */
-}
+/* START THE FIGHT AREA CONTAINER AND ATTACK BUTTON */
 
 #fight_box {
     float: left;
@@ -110,14 +102,9 @@
     width: 315px;
 }
 
-#enemy_box {
-    /* background-color: #666; */
-    height: 305px;
-    width: 315px;
-}
-
 #attack_area {
     /* background-color: #ddd; */
+    /* z-index: 3; */
     height: 20px;
     width: 315px;
     text-align: center;
@@ -134,11 +121,118 @@
     border-radius: 1rem;
     padding-left: 11px;
     box-shadow: 1px 1px 10px rgb(2, 1, 0);
+}
 
+/* END THE FIGHT AREA CONTAINER AND ATTACK BUTTON */
+
+/* START LARGE PLANET CONTAINERS, THE FIGHT BOXES */
+
+#enemy_box {
+    /* background-color: #666; */
+    position: relative;
+    height: 305px;
+    width: 315px;
 }
 
 #your_box {
     /* background-color: #888; */
+    position: relative;
     height: 305px;
     width: 315px;
 }
+
+/* END LARGE PLANET CONTAINERS, THE FIGHT BOXES */
+
+/* START PLANET TAG STYLES */
+
+/* ID of top large planet (enemy) name+hp box container */
+#enemy_tag {
+    box-sizing: border-box;
+    width: 200px;
+    font-family: 'system';
+    position: absolute;
+    bottom: 135px;
+    right: 60px;
+    opacity: .6;
+    background-color: #444;
+    border: 1px solid white;
+    color: white;
+    padding: 0px 10px;
+    letter-spacing: .3rem;
+}
+
+/* ID of bottom large planet (you) name+hp box container */
+#your_tag {
+    box-sizing: border-box;
+    width: 200px;
+    font-family: 'system';
+    position: absolute;
+    bottom: 135px;
+    right: 60px;
+    opacity: .6;
+    background-color: #444;
+    border: 1px solid white;
+    color: white;
+    padding: 0px 10px;
+    letter-spacing: .3rem;
+}
+
+/* ID of top (enemy) large planets name */
+#enemy_name {
+    text-align: left;
+}
+
+/* ID of bottom (you) large planets name */
+#your_name {
+    text-align: left;
+}
+
+/* ID of top (enemy) large planet health points */
+#enemy_hp {
+    text-align: left;
+    position: absolute;
+    right: 0px;
+    padding-left: 5px;
+    background-color: red;
+}
+
+/* ID of bottom (you) large planet health points */
+#your_hp {
+    text-align: left;
+    position: absolute;
+    right: 0px;
+    padding: 0px 0px 0px 5px;
+    background-color: red;
+}
+
+/* END PLANET TAG STYLES */
+
+/* START THE RIGHT SIDE COLUMN PLANET CONTAINER QUEUE */
+
+/* the container area for the queue of small planets */
+#char_bin {
+    float: right;
+    /* background-color: brown; */
+    width: 90px;
+    height: 630px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* class for the container holding each small planet */
+.char_box {
+    box-sizing: border-box;
+    /* background-color: #222; */
+    /* border: .5px solid #222; */
+    width: 90px;
+    height: 90px;
+}
+
+/* class for the img tag of each small planet */
+.character {
+    width: 100%;
+    /* margin: 10px; */
+}
+
+/* START THE RIGHT SIDE COLUMN PLANET CONTAINER QUEUE */
