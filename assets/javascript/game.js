@@ -14,6 +14,7 @@ let $planetsArray = [
         ap: 15,
         cap: 50,
         status: "",
+        game: "",
         photo: 'assets/images/arazius.png'
     },
 
@@ -23,6 +24,7 @@ let $planetsArray = [
         ap: 25,
         cap: 80,
         status: "",
+        game: "",
         photo: 'assets/images/iridir.png'
     },
 
@@ -32,6 +34,7 @@ let $planetsArray = [
         ap: 12,
         cap: 60,
         status: "",
+        game: "",
         photo: 'assets/images/kikinho.png'
     },
 
@@ -41,6 +44,7 @@ let $planetsArray = [
         ap: 20,
         cap: 70,
         status: "",
+        game: "",
         photo: 'assets/images/orlopia.png'
     },
 
@@ -50,6 +54,7 @@ let $planetsArray = [
         ap: 10,
         cap: 90,
         status: "",
+        game: "",
         photo: 'assets/images/ragen.png'
     },
 
@@ -59,6 +64,7 @@ let $planetsArray = [
         ap: 15,
         cap: 50,
         status: "",
+        game: "",
         photo: 'assets/images/sirith.png'
     },
 
@@ -68,6 +74,7 @@ let $planetsArray = [
         ap: 20,
         cap: 30,
         status: "",
+        game: "",
         photo: 'assets/images/trilope.png'
     },
 
@@ -144,7 +151,8 @@ let $defeatMessage;
 
 let $winMessage;
 
-let $victoryMessage = "You are the lord of your star system. Game Over.";
+// let $victoryMessage = "You are the lord of your star system. Game Over.";
+let $victoryMessage;
 
 // let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
 let $noEnemy;
@@ -178,6 +186,8 @@ $(document).ready(function () {
                     $hero = $planetsArray[i];
                     // set that object's .status property to "hero"
                     $hero.status = "hero";
+                    // set that object's .game property to "over"
+                    $hero.game = "over";
                     // set the $heroName variable to that objects .name value
                     // $heroName = $planetsArray[i].name;
                     // set the $heroHP variable to that objects .hp value
@@ -204,6 +214,8 @@ $(document).ready(function () {
                     $enemy = $planetsArray[i];
                     // set the clicked object's .status property to "enemy"
                     $enemy.status = "enemy";
+                    // set that object's .game property to "over"
+                    $enemy.game = "over";
                     // set the $enemyName variable to that objects .name value
                     // $enemyName = $planetsArray[i].name;
                     // set the $enemyHP variable to that objects .hp value
@@ -233,54 +245,65 @@ $(document).ready(function () {
     // when the attack button is clicked
     $("#attack_button").click(function (event) {
 
+        // loop through all objects in planetArray
+        for (let i = 0; i < $planetsArray.length; i++) {
 
-        if (!$enemy) {
+            if ($planetsArray[i].game !== "") {
 
-            $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
-            // display the result of the attack
-            $("#message_text").text($noEnemy);
+                if (!$enemy) {
 
-        } else if (!$hero) {
+                    $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
+                    // display the result of the attack
+                    $("#message_text").text($noEnemy);
 
-            $noHero = "You have been defeated. Accept your fate. Go home.";
-            // display the result of the attack
-            $("#message_text").text($noHero);
+                } else if (!$hero) {
 
-        } else {
+                    $noHero = "You have been defeated. Accept your fate. Go home.";
+                    // display the result of the attack
+                    $("#message_text").text($noHero);
 
-            $attackPoints += $hero.ap;
-            $counterAttackPoints = $enemy.cap;
-            $enemy.hp = $enemy.hp - $attackPoints;
-            $("#enemy_hp").text($enemy.hp);
-            $hero.hp = $hero.hp - $counterAttackPoints;
-            $("#your_hp").text($hero.hp);
+                } else {
 
-            $attackResult = "You attacked " + $enemy.name + " for " + $attackPoints + " points of damage. " + $enemy.name + " attacked you for " + $counterAttackPoints + " points of damage. Attack again.";
+                    $attackPoints += $hero.ap;
+                    $counterAttackPoints = $enemy.cap;
+                    $enemy.hp = $enemy.hp - $attackPoints;
+                    $("#enemy_hp").text($enemy.hp);
+                    $hero.hp = $hero.hp - $counterAttackPoints;
+                    $("#your_hp").text($hero.hp);
 
-            // display the result of the attack
-            $("#message_text").text($attackResult);
+                    $attackResult = "You attacked " + $enemy.name + " for " + $attackPoints + " points of damage. " + $enemy.name + " attacked you for " + $counterAttackPoints + " points of damage. Attack again.";
 
-            if ($enemy.hp < 0) {
+                    // display the result of the attack
+                    $("#message_text").text($attackResult);
 
-                $("#enemy_box").hide();
-                $winMessage = "You have conquered " + $enemy.name + ". Select another world to subdue.";
-                // display the result of the attack
-                $("#message_text").text($winMessage);
-                $enemy = "";
-                return;
+                    if ($enemy.hp < 0) {
 
+                        $("#enemy_box").hide();
+                        $winMessage = "You have conquered " + $enemy.name + ". Select another world to subdue.";
+                        // display the result of the attack
+                        $("#message_text").text($winMessage);
+                        $enemy = "";
+                        return;
 
-            } else if ($hero.hp < 0) {
+                    } else if ($hero.hp < 0) {
 
-                $("#your_box").hide();
-                $defeatMessage = "You have been defeated by " + $enemy.name + ". Game Over.";
-                // display the result of the attack
-                $("#message_text").text($defeatMessage);
-                $hero = "";
-                return;
+                        $("#your_box").hide();
+                        $defeatMessage = "You have been defeated by " + $enemy.name + ". Game Over.";
+                        // display the result of the attack
+                        $("#message_text").text($defeatMessage);
+                        $hero = "";
+                        return;
+
+                    }
+                }
+
+            } else {
+
+                // $victoryMessage = "You are the lord of your star system. Game Over.";
+                // // display the result of the attack
+                // $("#message_text").text($victoryMessage);
 
             }
-
         }
 
     });
