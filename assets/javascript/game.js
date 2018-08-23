@@ -101,61 +101,32 @@ let $victoryMessage = "You are the lord of your star system. Game Over.";
 
 let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
 
+let $hero;
 
-
+let $enemy;
 
 
 
 $(document).ready(function () {
 
-    // START JQUERY JS:
-
     // display the choose character message on game start
     $("#message_text").text($startMessage);
 
-
-    // HOW DO I WRITE A LOOP TO SELECT THE ID OF ANY ELEMENT OF A CERTAIN CLASS CLICKED ON?
-
-    // when this planets container is clicked on
-    $("#ARAZIUS").click(function (event) {
-        // then make that planet the $hero
-        $hero = $planetsArray[0];
-    });
-
     // when a queued planets class box is clicked
-    $('.char_box').click(function () {
+    $(".char_box").click(function (event) {
 
         // loop through all objects in planetArray
         for (let i = 0; i < $planetsArray.length; i++) {
+            // and when you find an array element whose .name matches the clicked .char_box's ID...
+            if ($planetsArray[i].name === this.id) {
 
-            // define a variable $pNom for each looped object's .name
-            const $pNom = $planetsArray[i].name;
 
-            // and IF the ID of element clicked matches a .name of array object
-            // this identifies the particular element that has been clicked on
-            if ($pNom === this.id && $planetsArray[i].status !== "hero") {
-
-                    // if any planetArray[i] DOES === "hero", then all others clicked on are set to "enemy"
-                    // set that object's .status property to "enemy"
-                    $planetsArray[i].status = "enemy";
-                    // and make the whole object the value of the $enemy variable
-                    let $enemy = $planetsArray[i];
-                    // and .hide THIS (the element clicked with class="char_box")
-                    $(this).hide().attr('id');
-                    // and put .name, .hp, and photo of $hero object into ENEMY html divs
-                    $("#enemy_hp").text($enemy.hp);
-                    $("#enemy_name").text($enemy.name);
-                    $("#enemy_photo").attr('src', $enemy.photo);
-
-                    // and console.log to confirm everything is working
-                    console.log($enemy);
-
-                } else {
+                if (!$hero) {
 
                     // set that object's .status property to "hero"
                     $planetsArray[i].status = "hero";
                     // and make the whole object the value of the $hero variable
-                    let $hero = $planetsArray[i];
+                    $hero = $planetsArray[i];
                     // and .hide THIS (the element clicked with class="char_box")
                     $(this).hide().attr('id');
                     // and put .name, .hp, and photo of $hero object into YOUR html divs
@@ -166,25 +137,27 @@ $(document).ready(function () {
                     // and console.log to confirm everything is working
                     console.log($hero);
 
+
+                } else {
+
+                    // if any planetArray[i] DOES === "hero", then all others clicked on are set to "enemy"
+                    // set that object's .status property to "enemy"
+                    $planetsArray[i].status = "enemy";
+                    // and make the whole object the value of the $enemy variable
+                    $enemy = $planetsArray[i];
+                    // and .hide THIS (the element clicked with class="char_box")
+                    $(this).hide().attr('id');
+                    // and put .name, .hp, and photo of $hero object into ENEMY html divs
+                    $("#enemy_hp").text($enemy.hp);
+                    $("#enemy_name").text($enemy.name);
+                    $("#enemy_photo").attr('src', $enemy.photo);
+
+                    // and console.log to confirm everything is working
+                    console.log($enemy);
+
                 }
-
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     });
 
 
@@ -197,8 +170,21 @@ $(document).ready(function () {
 
 
 
-    // END EVENT LISTENER TO LISTEN FOR KEY PRESSES AND CALL PLAY() FUNCTION
 
 
-    // END JQUERY JS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
