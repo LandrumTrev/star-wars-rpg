@@ -157,7 +157,11 @@ let $victoryMessage;
 // let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
 let $noEnemy;
 
-
+let checkStatus = function (g) {
+     if($planetsArray.game === "over") {
+        return g;
+     }
+};
 
 
 
@@ -258,6 +262,7 @@ $(document).ready(function () {
 
                 } else if (!$hero) {
 
+                    $("#char_bin").hide();
                     $noHero = "You have been defeated. Accept your fate. Go home.";
                     // display the result of the attack
                     $("#message_text").text($noHero);
@@ -288,6 +293,7 @@ $(document).ready(function () {
                     } else if ($hero.hp < 0) {
 
                         $("#your_box").hide();
+                        $("#char_bin").hide();
                         $defeatMessage = "You have been defeated by " + $enemy.name + ". Game Over.";
                         // display the result of the attack
                         $("#message_text").text($defeatMessage);
@@ -297,11 +303,13 @@ $(document).ready(function () {
                     }
                 }
 
-            } else {
+            } else if ($planetsArray.every(checkStatus)) {
 
-                // $victoryMessage = "You are the lord of your star system. Game Over.";
-                // // display the result of the attack
-                // $("#message_text").text($victoryMessage);
+                $("#char_bin").hide();
+                $victoryMessage = "You are the lord of your star system. Game Over.";
+                // display the result of the attack
+                $("#message_text").text($victoryMessage);
+                return;
 
             }
         }
