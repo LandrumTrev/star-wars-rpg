@@ -75,15 +75,30 @@ let $planetsArray = [
 
 
 // INITIALIZE GAME PLAY VARIABLES
+// THESE HAVE TO COME BEFORE THE MESSAGE VARIABLES THAT USE THEM
 
-let $enemyName = "ARAZIUS";
+// represents the entire array object for the hero planet
+let $hero;
 
-let $attackPoints = 8;
+// represents the entire array object for the enemy planet
+let $enemy;
 
-let $counterAttackPoints = 5;
+// represents the .name property of the enemy planet
+let $enemyName = "";
+
+// represents the .name property of the hero planet
+let $heroName = "";
+
+// represents the incrementing .ap property of the hero planet
+let $attackPoints = 0;
+
+// represents the static .cap property of the enemy planet
+let $counterAttackPoints = 0;
+
 
 
 // INITIALIZE LIST OF MESSAGES THAT FOLLOW GAME PLAY
+// THESE HAVE TO COME AFTER THE BASIC GAME PLAY VARIABLES
 
 let $startMessage = "Choose a world to be your capital.";
 
@@ -91,7 +106,9 @@ let $chooseEnemy = "Select a world to subdue.";
 
 let $attackInfo = "Click ATTACK until one world emerges victorious.";
 
-let $attackResult = "You attacked " + $enemyName + " for " + $attackPoints + " points of damage. " + $enemyName + " attacked you for " + $counterAttackPoints + " points of damage. Attack again.";
+// let $attackResult = "You attacked " + $enemyName + " for " + $attackPoints + " points of damage. " + $enemyName + " attacked you for " + $counterAttackPoints + " points of damage. Attack again.";
+
+let $attackResult;
 
 let $defeatMessage = "You have been defeated. Game Over.";
 
@@ -101,9 +118,8 @@ let $victoryMessage = "You are the lord of your star system. Game Over.";
 
 let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
 
-let $hero;
 
-let $enemy;
+
 
 
 
@@ -111,6 +127,9 @@ $(document).ready(function () {
 
     // display the choose character message on game start
     $("#message_text").text($startMessage);
+
+
+    // START SELF AND ENEMY PLANET SELECTIONS FUNCTION
 
     // when a queued planets class box is clicked
     $(".char_box").click(function (event) {
@@ -126,6 +145,8 @@ $(document).ready(function () {
 
                     // set that object's .status property to "hero"
                     $planetsArray[i].status = "hero";
+                    // set the $heroName variable to that objects .name value
+                    $heroName = $planetsArray[i].name;
                     // and make the whole object the value of $hero
                     $hero = $planetsArray[i];
                     // and .hide THIS element (the clicked list planet)
@@ -134,6 +155,9 @@ $(document).ready(function () {
                     $("#your_hp").text($hero.hp);
                     $("#your_name").text($hero.name);
                     $("#your_photo").attr('src', $hero.photo);
+
+                    // and display the message to choose an enemy
+                    $("#message_text").text($chooseEnemy);
 
                     // and console.log the value of $hero
                     console.log($hero);
@@ -144,6 +168,8 @@ $(document).ready(function () {
 
                     // set the clicked object's .status property to "enemy"
                     $planetsArray[i].status = "enemy";
+                    // set the $enemyName variable to that objects .name value
+                    $enemyName = $planetsArray[i].name;
                     // and make the whole object the value of the $enemy variable
                     $enemy = $planetsArray[i];
                     // and .hide THIS (the element clicked with class="char_box")
@@ -153,12 +179,30 @@ $(document).ready(function () {
                     $("#enemy_name").text($enemy.name);
                     $("#enemy_photo").attr('src', $enemy.photo);
 
+                    // and display the message to start the battle
+                    $("#message_text").text($attackInfo);
+
                     // and console.log the value of $enemy
                     console.log($enemy);
 
                 }
             }
         }
+    });
+
+    // END SELF AND ENEMY PLANET SELECTIONS FUNCTION
+
+    // START ATTACK BUTTON GAMEPLAY FUNCTION
+
+    // when the attack button is clicked
+    $("#attack_button").click(function (event) {
+
+        $attackResult = "You attacked " + $enemyName + " for " + $attackPoints + " points of damage. " + $enemyName + " attacked you for " + $counterAttackPoints + " points of damage. Attack again.";
+
+        // display the result of the attack
+        $("#message_text").text($attackResult);
+
+
     });
 
 
@@ -184,8 +228,7 @@ $(document).ready(function () {
 
 
 
-
-
+    // END ATTACK BUTTON GAMEPLAY FUNCTION
 
 
 });
