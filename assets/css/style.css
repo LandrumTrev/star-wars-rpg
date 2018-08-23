@@ -257,8 +257,10 @@
 
 /* class of small planets health points formatting */
 .char_hp {
-    float: right;
-    padding: 0px 0px 0px 3px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 1px 0px 1px 3px;
     background-color: red;
 }
 /* START THE RIGHT SIDE COLUMN PLANET CONTAINER QUEUE */
