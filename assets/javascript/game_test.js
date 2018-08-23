@@ -117,31 +117,32 @@ $(document).ready(function () {
 
         // loop through all objects in planetArray
         for (let i = 0; i < $planetsArray.length; i++) {
-            // and when you find an array element whose .name matches the clicked .char_box's ID...
+
+            // and when array element object .name matches clicked .char_box's ID...
             if ($planetsArray[i].name === this.id) {
 
-
+                // if $hero does not have a value (but IS initialized!)
                 if (!$hero) {
 
                     // set that object's .status property to "hero"
                     $planetsArray[i].status = "hero";
-                    // and make the whole object the value of the $hero variable
+                    // and make the whole object the value of $hero
                     $hero = $planetsArray[i];
-                    // and .hide THIS (the element clicked with class="char_box")
+                    // and .hide THIS element (the clicked list planet)
                     $(this).hide().attr('id');
                     // and put .name, .hp, and photo of $hero object into YOUR html divs
                     $("#your_hp").text($hero.hp);
                     $("#your_name").text($hero.name);
                     $("#your_photo").attr('src', $hero.photo);
 
-                    // and console.log to confirm everything is working
+                    // and console.log the value of $hero
                     console.log($hero);
 
-
+                    // but if $hero DOES have a value already,
+                    // then all subsequent planets clicked will have .status "enemy"
                 } else {
 
-                    // if any planetArray[i] DOES === "hero", then all others clicked on are set to "enemy"
-                    // set that object's .status property to "enemy"
+                    // set the clicked object's .status property to "enemy"
                     $planetsArray[i].status = "enemy";
                     // and make the whole object the value of the $enemy variable
                     $enemy = $planetsArray[i];
@@ -152,7 +153,7 @@ $(document).ready(function () {
                     $("#enemy_name").text($enemy.name);
                     $("#enemy_photo").attr('src', $enemy.photo);
 
-                    // and console.log to confirm everything is working
+                    // and console.log the value of $enemy
                     console.log($enemy);
 
                 }
