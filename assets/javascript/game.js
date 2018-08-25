@@ -1,6 +1,6 @@
 // Star Wars RPG jQuery game
 // aka System Lord
-// by Richard Trevillian, 2018-08-23
+// by Richard Trevillian, 2018-08-25
 
 
 $(document).ready(function () {
@@ -196,7 +196,7 @@ $(document).ready(function () {
                     $("#message_text").text($chooseEnemy);
 
                     // and console.log the value of $hero
-                    console.log($hero);
+                    // console.log($hero);
 
                     // but if $hero DOES have a value already,
                     // then all subsequent planets clicked will have .status "enemy"
@@ -221,7 +221,7 @@ $(document).ready(function () {
                     $("#message_text").text($attackInfo);
 
                     // and console.log the value of $enemy
-                    console.log($enemy);
+                    // console.log($enemy);
 
                 }
             }
@@ -265,17 +265,7 @@ $(document).ready(function () {
     // END LIGHTSHOW FUNCTION TO PRODUCE RANDOM LIGHTNING STRIKES
 
 
-    // WHEN THE GAME ENDS, THE ATTACK BUTTON TURNS INTO A RESTART BUTTON
-    // RELOADING THE PAGE IS NOT WORKING FOR SOME REASON
-
-    $("#restart").click(function (event) {
-        // $("#attack_button").attr("id", "restart");
-        // $("#restart").text("RESTART");
-        window.location.reload(true);
-    });
-
-
-    // START ATTACK BUTTON GAMEPLAY FUNCTION
+     // START ATTACK BUTTON GAMEPLAY FUNCTION
 
     // when the attack button is clicked
     $("#attack_button").click(function (event) {
@@ -317,8 +307,7 @@ $(document).ready(function () {
 
                 } else {
 
-                    lightshow();
-                    $attackPoints += $hero.ap;
+                    $attackPoints = $attackPoints + $hero.ap;
                     $counterAttackPoints = $enemy.cap;
                     $enemy.hp = $enemy.hp - $attackPoints;
                     $("#enemy_hp").text($enemy.hp);
@@ -326,21 +315,22 @@ $(document).ready(function () {
                     $("#your_hp").text($hero.hp);
 
                     let $attackResult = "You attacked " + $enemy.name + " for " + $attackPoints + " points of damage. " + $enemy.name + " attacked you for " + $counterAttackPoints + " points of damage. Attack again.";
-
+                    lightshow();
                     // display the result of the attack
                     $("#message_text").text($attackResult);
+                    // return;
+
 
                     if ($enemy.hp <= 0) {
-
-                        lightshow();
-                        setTimeout(() => {
-                            $("#enemy_box").hide();
-                        }, 1000);
 
                         let $winMessage = "You have conquered " + $enemy.name + ". Select another world to subdue.";
                         // display the result of the attack
                         $("#message_text").text($winMessage);
                         $enemy = "";
+                        lightshow();
+                        setTimeout(() => {
+                            $("#enemy_box").hide();
+                        }, 1000);
                         return;
 
                     } else if ($hero.hp <= 0) {
@@ -364,20 +354,22 @@ $(document).ready(function () {
                         $hero = "";
                         return;
 
+                    } else {
+                        return;
                     }
                 }
 
             } else if ($planetsArray.every(checkStatus)) {
 
+                $("#attack_button").remove();
+                let $victoryMessage = "You are the lord of your star system. Game Over.";
+                // display the result of the attack
+                $("#message_text").text($victoryMessage);
+                // $("#restart").text("RESTART");
                 lightshow();
                 setTimeout(() => {
                     $("#enemy_box").hide();
                 }, 1000);
-                let $victoryMessage = "You are the lord of your star system. Game Over.";
-                // display the result of the attack
-                $("#message_text").text($victoryMessage);
-                $("#attack_button").attr("id", "restart");
-                $("#restart").text("RESTART");
                 return;
 
             }
@@ -387,6 +379,13 @@ $(document).ready(function () {
 
     // END ATTACK BUTTON GAMEPLAY FUNCTION
 
+
+    // WHEN THE GAME ENDS, THE ATTACK BUTTON TURNS INTO A RESTART BUTTON
+
+    $('#reset_button').click(function () {
+        location.reload();
+        console.log("I'm a magical butterfly!");
+    });
 
 
 

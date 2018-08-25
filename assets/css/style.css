@@ -120,9 +120,25 @@
     text-align: center;
 }
 
-#attack_area button {
-    position: relative;
+#attack_button {
+    position: absolute;
     z-index: 3;
+    background-color: #740f0f;
+    color: #aaa;
+    height: 30px;
+    width: 130px;
+    line-height: 1.7rem;
+    text-align: center;
+    font-family: system;
+    letter-spacing: .3rem;
+    border-radius: 1rem;
+    padding-left: 13px;
+    box-shadow: 1px 1px 10px rgb(2, 1, 0);
+}
+
+#reset_button {
+    position: relative;
+    z-index: 2;
     background-color: #740f0f;
     color: #aaa;
     height: 30px;

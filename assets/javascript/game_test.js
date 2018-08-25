@@ -1,6 +1,6 @@
 // Star Wars RPG jQuery game
 // aka System Lord
-// by Richard Trevillian, 2018-08-23
+// by Richard Trevillian, 2018-08-25
 
 
 $(document).ready(function () {
@@ -12,9 +12,9 @@ $(document).ready(function () {
 
         {
             name: "ARAZIUS",
-            hp: 600,
-            ap: 15,
-            cap: 50,
+            hp: 200,
+            ap: 35,
+            cap: 35,
             status: "",
             game: "",
             photo: 'assets/images/arazius.png'
@@ -22,9 +22,9 @@ $(document).ready(function () {
 
         {
             name: "IRIDIR",
-            hp: 800,
-            ap: 25,
-            cap: 80,
+            hp: 180,
+            ap: 30,
+            cap: 30,
             status: "",
             game: "",
             photo: 'assets/images/iridir.png'
@@ -32,9 +32,9 @@ $(document).ready(function () {
 
         {
             name: "KIKINHO",
-            hp: 1100,
-            ap: 12,
-            cap: 60,
+            hp: 160,
+            ap: 25,
+            cap: 25,
             status: "",
             game: "",
             photo: 'assets/images/kikinho.png'
@@ -42,9 +42,9 @@ $(document).ready(function () {
 
         {
             name: "ORLOPIA",
-            hp: 900,
+            hp: 140,
             ap: 20,
-            cap: 70,
+            cap: 20,
             status: "",
             game: "",
             photo: 'assets/images/orlopia.png'
@@ -52,9 +52,9 @@ $(document).ready(function () {
 
         {
             name: "RAGEN",
-            hp: 900,
-            ap: 10,
-            cap: 90,
+            hp: 120,
+            ap: 15,
+            cap: 15,
             status: "",
             game: "",
             photo: 'assets/images/ragen.png'
@@ -62,9 +62,9 @@ $(document).ready(function () {
 
         {
             name: "SIRITH",
-            hp: 300,
-            ap: 15,
-            cap: 50,
+            hp: 100,
+            ap: 10,
+            cap: 10,
             status: "",
             game: "",
             photo: 'assets/images/sirith.png'
@@ -72,13 +72,45 @@ $(document).ready(function () {
 
         {
             name: "TRILOPE",
-            hp: 550,
-            ap: 20,
-            cap: 30,
+            hp: 80,
+            ap: 5,
+            cap: 5,
             status: "",
             game: "",
             photo: 'assets/images/trilope.png'
         },
+
+    ];
+
+
+    let boltArray = [
+
+        "L01.png",
+        "L02.png",
+        "L03.png",
+        "L04.png",
+        "L05.png",
+        "L06.png",
+        "L07.png",
+        "L08.png",
+        "L09.png",
+        "L10.png",
+        "L11.png",
+        "L12.png",
+        "L13.png",
+        "L14.png",
+        "L15.png",
+        "L16.png",
+        "L17.png",
+        "L18.png",
+        "L19.png",
+        "L20.png",
+        "L21.png",
+        "L22.png",
+        "L23.png",
+        "L24.png",
+        "L25.png",
+        "L26.png",
 
     ];
 
@@ -164,7 +196,7 @@ $(document).ready(function () {
                     $("#message_text").text($chooseEnemy);
 
                     // and console.log the value of $hero
-                    console.log($hero);
+                    // console.log($hero);
 
                     // but if $hero DOES have a value already,
                     // then all subsequent planets clicked will have .status "enemy"
@@ -189,7 +221,7 @@ $(document).ready(function () {
                     $("#message_text").text($attackInfo);
 
                     // and console.log the value of $enemy
-                    console.log($enemy);
+                    // console.log($enemy);
 
                 }
             }
@@ -198,10 +230,46 @@ $(document).ready(function () {
 
     // END SELF AND ENEMY PLANET SELECTIONS FUNCTION
 
-    // START ATTACK BUTTON GAMEPLAY FUNCTION
+
+    // START LIGHTSHOW FUNCTION TO PRODUCE RANDOM LIGHTNING STRIKES
+
+    // function defines a brief lightning show for use by ATTACK button
+    function lightshow() {
+
+        // this function calls a single instance of lightning
+        function lightning(imgAr, path) {
+            path = 'assets/images/'; // default path here
+            let num = Math.floor(Math.random() * imgAr.length);
+            let img = imgAr[num];
+            let imgStr = path + img;
+            $("#lightning_bolts").attr("src", imgStr);
+        }
+
+        // callback function defined as lightning() with boltArray argument
+        let lightup = function () {
+            lightning(boltArray);
+        }
+
+        // a variable to stand for AND IMMEDIATELY CALL lightup() every .1 seconds
+        let intervalId = setInterval(lightup, 100);
+
+        // then after a 1 second light show (x10 .1sec calls of lightning())
+        setTimeout(() => {
+            // clearInterval stops the intervalId function
+            clearInterval(intervalId);
+            // and reset the <img id="lightning_bolts"> src="" to empty
+            $("#lightning_bolts").attr("src", "");
+        }, 1000);
+    };
+
+    // END LIGHTSHOW FUNCTION TO PRODUCE RANDOM LIGHTNING STRIKES
+
+
+     // START ATTACK BUTTON GAMEPLAY FUNCTION
 
     // when the attack button is clicked
     $("#attack_button").click(function (event) {
+
 
         // loop through all objects in planetArray
         for (let i = 0; i < $planetsArray.length; i++) {
@@ -210,21 +278,25 @@ $(document).ready(function () {
             // FUNCTION FOR CHECKING IF ALL ENEMIES DEFEATED (GAME OVER)
             // checks if the .game property of all array objects is "over"
             // called by final ELSE IF statement
-
-            let checkStatus = function (g) {
-                if ($planetsArray.game === "over") {
-                    return g;
-                }
+            function checkStatus(planet) {
+                return planet.game === "over";
             };
 
 
-            if ($planetsArray[i].game !== "") {
+            if (!$planetsArray.every(checkStatus)) {
 
-                if (!$enemy) {
+                if (!$enemy && !$hero) {
+
+                    $("#message_text").text($startMessage);
+
+
+                } else if (!$enemy) {
 
                     let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
                     // display the result of the attack
                     $("#message_text").text($noEnemy);
+                    lightshow();
+
 
                 } else if (!$hero) {
 
@@ -235,7 +307,7 @@ $(document).ready(function () {
 
                 } else {
 
-                    $attackPoints += $hero.ap;
+                    $attackPoints = $attackPoints + $hero.ap;
                     $counterAttackPoints = $enemy.cap;
                     $enemy.hp = $enemy.hp - $attackPoints;
                     $("#enemy_hp").text($enemy.hp);
@@ -243,20 +315,25 @@ $(document).ready(function () {
                     $("#your_hp").text($hero.hp);
 
                     let $attackResult = "You attacked " + $enemy.name + " for " + $attackPoints + " points of damage. " + $enemy.name + " attacked you for " + $counterAttackPoints + " points of damage. Attack again.";
-
+                    lightshow();
                     // display the result of the attack
                     $("#message_text").text($attackResult);
+                    // return;
 
-                    if ($enemy.hp < 0) {
 
-                        $("#enemy_box").hide();
+                    if ($enemy.hp <= 0) {
+
                         let $winMessage = "You have conquered " + $enemy.name + ". Select another world to subdue.";
                         // display the result of the attack
                         $("#message_text").text($winMessage);
                         $enemy = "";
+                        lightshow();
+                        setTimeout(() => {
+                            $("#enemy_box").hide();
+                        }, 1000);
                         return;
 
-                    } else if ($hero.hp < 0) {
+                    } else if ($hero.hp <= 0) {
 
                         $("#your_box").hide();
                         $("#char_bin").hide();
@@ -266,15 +343,33 @@ $(document).ready(function () {
                         $hero = "";
                         return;
 
+                    } else if ($hero.hp <= 0 && $enemy.hp <= 0) {
+
+                        $("#your_box").hide();
+                        $("#enemy_box").hide();
+                        $("#char_bin").hide();
+                        let $MADMessage = "Congratulations. You and " + $enemy.name + " have destroyed each other. Game Over.";
+                        // display the result of the attack
+                        $("#message_text").text($MADMessage);
+                        $hero = "";
+                        return;
+
+                    } else {
+                        return;
                     }
                 }
 
             } else if ($planetsArray.every(checkStatus)) {
 
-                $("#char_bin").hide();
+                $("#attack_button").remove();
                 let $victoryMessage = "You are the lord of your star system. Game Over.";
                 // display the result of the attack
                 $("#message_text").text($victoryMessage);
+                // $("#restart").text("RESTART");
+                lightshow();
+                setTimeout(() => {
+                    $("#enemy_box").hide();
+                }, 1000);
                 return;
 
             }
@@ -283,6 +378,16 @@ $(document).ready(function () {
     });
 
     // END ATTACK BUTTON GAMEPLAY FUNCTION
+
+
+    // WHEN THE GAME ENDS, THE ATTACK BUTTON TURNS INTO A RESTART BUTTON
+
+    $('#reset_button').click(function () {
+        location.reload();
+        console.log("I'm a magical butterfly!");
+    });
+
+
 
     // END jQUERY FUNCTION FOR SYSTEMLORD (aka Star Wars RPG)
 
