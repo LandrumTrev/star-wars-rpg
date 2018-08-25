@@ -12,9 +12,9 @@ $(document).ready(function () {
 
         {
             name: "ARAZIUS",
-            hp: 600,
-            ap: 15,
-            cap: 50,
+            hp: 200,
+            ap: 35,
+            cap: 35,
             status: "",
             game: "",
             photo: 'assets/images/arazius.png'
@@ -22,9 +22,9 @@ $(document).ready(function () {
 
         {
             name: "IRIDIR",
-            hp: 800,
-            ap: 25,
-            cap: 80,
+            hp: 180,
+            ap: 30,
+            cap: 30,
             status: "",
             game: "",
             photo: 'assets/images/iridir.png'
@@ -32,9 +32,9 @@ $(document).ready(function () {
 
         {
             name: "KIKINHO",
-            hp: 1100,
-            ap: 12,
-            cap: 60,
+            hp: 160,
+            ap: 25,
+            cap: 25,
             status: "",
             game: "",
             photo: 'assets/images/kikinho.png'
@@ -42,9 +42,9 @@ $(document).ready(function () {
 
         {
             name: "ORLOPIA",
-            hp: 900,
+            hp: 140,
             ap: 20,
-            cap: 70,
+            cap: 20,
             status: "",
             game: "",
             photo: 'assets/images/orlopia.png'
@@ -52,9 +52,9 @@ $(document).ready(function () {
 
         {
             name: "RAGEN",
-            hp: 900,
-            ap: 10,
-            cap: 90,
+            hp: 120,
+            ap: 15,
+            cap: 15,
             status: "",
             game: "",
             photo: 'assets/images/ragen.png'
@@ -62,9 +62,9 @@ $(document).ready(function () {
 
         {
             name: "SIRITH",
-            hp: 300,
-            ap: 15,
-            cap: 50,
+            hp: 100,
+            ap: 10,
+            cap: 10,
             status: "",
             game: "",
             photo: 'assets/images/sirith.png'
@@ -72,9 +72,9 @@ $(document).ready(function () {
 
         {
             name: "TRILOPE",
-            hp: 550,
-            ap: 20,
-            cap: 30,
+            hp: 80,
+            ap: 5,
+            cap: 5,
             status: "",
             game: "",
             photo: 'assets/images/trilope.png'
@@ -230,25 +230,28 @@ $(document).ready(function () {
 
     // END SELF AND ENEMY PLANET SELECTIONS FUNCTION
 
+
+    // START LIGHTSHOW FUNCTION TO PRODUCE RANDOM LIGHTNING STRIKES
+
     // function defines a brief lightning show for use by ATTACK button
     function lightshow() {
 
         // this function calls a single instance of lightning
         function lightning(imgAr, path) {
             path = 'assets/images/'; // default path here
-            var num = Math.floor(Math.random() * imgAr.length);
-            var img = imgAr[num];
-            var imgStr = path + img;
+            let num = Math.floor(Math.random() * imgAr.length);
+            let img = imgAr[num];
+            let imgStr = path + img;
             $("#lightning_bolts").attr("src", imgStr);
         }
 
         // callback function defined as lightning() with boltArray argument
-        var lightup = function () {
+        let lightup = function () {
             lightning(boltArray);
         }
 
         // a variable to stand for AND IMMEDIATELY CALL lightup() every .1 seconds
-        var intervalId = setInterval(lightup, 100);
+        let intervalId = setInterval(lightup, 100);
 
         // then after a 1 second light show (x10 .1sec calls of lightning())
         setTimeout(() => {
@@ -259,18 +262,18 @@ $(document).ready(function () {
         }, 1000);
     };
 
+    // END LIGHTSHOW FUNCTION TO PRODUCE RANDOM LIGHTNING STRIKES
+
+
+    // START TURN ATTACK BUTTON INTO RESTART BUTTON
+
+    // END TURN ATTACK BUTTON INTO RESTART BUTTON
+
 
     // START ATTACK BUTTON GAMEPLAY FUNCTION
 
     // when the attack button is clicked
     $("#attack_button").click(function (event) {
-
-
-
-
-
-        // this calls the 1 second lightning show 
-        // lightshow();
 
 
         // loop through all objects in planetArray
@@ -280,17 +283,19 @@ $(document).ready(function () {
             // FUNCTION FOR CHECKING IF ALL ENEMIES DEFEATED (GAME OVER)
             // checks if the .game property of all array objects is "over"
             // called by final ELSE IF statement
-
-            let checkStatus = function (g) {
-                if ($planetsArray.game === "over") {
-                    return g;
-                }
+            function checkStatus(planet) {
+                return planet.game === "over";
             };
 
 
-            if ($planetsArray[i].game !== "") {
+            if (!$planetsArray.every(checkStatus)) {
 
-                if (!$enemy) {
+                if (!$enemy && !$hero) {
+
+                    $("#message_text").text($startMessage);
+
+
+                } else if (!$enemy) {
 
                     let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
                     // display the result of the attack
@@ -320,7 +325,7 @@ $(document).ready(function () {
                     // display the result of the attack
                     $("#message_text").text($attackResult);
 
-                    if ($enemy.hp < 0) {
+                    if ($enemy.hp <= 0) {
 
                         lightshow();
                         setTimeout(() => {
@@ -333,7 +338,7 @@ $(document).ready(function () {
                         $enemy = "";
                         return;
 
-                    } else if ($hero.hp < 0) {
+                    } else if ($hero.hp <= 0) {
 
                         $("#your_box").hide();
                         $("#char_bin").hide();
@@ -343,12 +348,26 @@ $(document).ready(function () {
                         $hero = "";
                         return;
 
+                    } else if ($hero.hp <= 0 && $enemy.hp <= 0) {
+
+                        $("#your_box").hide();
+                        $("#enemy_box").hide();
+                        $("#char_bin").hide();
+                        let $MADMessage = "Congratulations. You and " + $enemy.name + " have destroyed each other. Game Over.";
+                        // display the result of the attack
+                        $("#message_text").text($MADMessage);
+                        $hero = "";
+                        return;
+
                     }
                 }
 
             } else if ($planetsArray.every(checkStatus)) {
 
-                $("#char_bin").hide();
+                lightshow();
+                setTimeout(() => {
+                    $("#enemy_box").hide();
+                }, 1000);
                 let $victoryMessage = "You are the lord of your star system. Game Over.";
                 // display the result of the attack
                 $("#message_text").text($victoryMessage);
