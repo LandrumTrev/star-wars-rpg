@@ -4,6 +4,7 @@
 ##### University of Richmond, Full Stack Web Development Bootcamp
 
 [play this game](https://landrumtrev.github.io/star-wars-rpg/)
+
 [view the source code](https://github.com/LandrumTrev/star-wars-rpg)
 
 [https://landrumtrev.github.io/star-wars-rpg/](https://landrumtrev.github.io/star-wars-rpg/)
