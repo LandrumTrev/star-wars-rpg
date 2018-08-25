@@ -2,7 +2,7 @@
 // aka SystemLord
 // © Richard Trevillian, 2018-08-25
 // University of Richmond, Full Stack Web Development Bootcamp
-
+// JavaScript (jQuery) code
 
 $(document).ready(function () {
 
