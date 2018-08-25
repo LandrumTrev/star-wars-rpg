@@ -1,6 +1,7 @@
-// Star Wars RPG jQuery game
-// aka System Lord
-// by Richard Trevillian, 2018-08-25
+// "Star Wars RPG jQuery game" assignment
+// aka SystemLord
+// © Richard Trevillian, 2018-08-25
+// University of Richmond, Full Stack Web Development Bootcamp
 
 
 $(document).ready(function () {
@@ -12,72 +13,72 @@ $(document).ready(function () {
 
         {
             name: "ARAZIUS",
-            hp: 200,
-            ap: 35,
-            cap: 35,
+            hp: 330,
+            ap: 5,
+            cap: 10,
             status: "",
             game: "",
-            photo: 'assets/images/arazius.png'
+            photo: 'assets/images/planets/arazius.png'
         },
 
         {
             name: "IRIDIR",
-            hp: 180,
-            ap: 30,
-            cap: 30,
+            hp: 210,
+            ap: 6,
+            cap: 12,
             status: "",
             game: "",
-            photo: 'assets/images/iridir.png'
+            photo: 'assets/images/planets/iridir.png'
         },
 
         {
             name: "KIKINHO",
             hp: 160,
-            ap: 25,
-            cap: 25,
+            ap: 7,
+            cap: 14,
             status: "",
             game: "",
-            photo: 'assets/images/kikinho.png'
+            photo: 'assets/images/planets/kikinho.png'
         },
 
         {
             name: "ORLOPIA",
-            hp: 140,
-            ap: 20,
-            cap: 20,
+            hp: 180,
+            ap: 8,
+            cap: 16,
             status: "",
             game: "",
-            photo: 'assets/images/orlopia.png'
+            photo: 'assets/images/planets/orlopia.png'
         },
 
         {
             name: "RAGEN",
-            hp: 120,
-            ap: 15,
-            cap: 15,
+            hp: 210,
+            ap: 9,
+            cap: 18,
             status: "",
             game: "",
-            photo: 'assets/images/ragen.png'
+            photo: 'assets/images/planets/ragen.png'
         },
 
         {
             name: "SIRITH",
-            hp: 100,
+            hp: 240,
             ap: 10,
-            cap: 10,
+            cap: 20,
             status: "",
             game: "",
-            photo: 'assets/images/sirith.png'
+            photo: 'assets/images/planets/sirith.png'
         },
 
         {
             name: "TRILOPE",
-            hp: 80,
-            ap: 5,
-            cap: 5,
+            hp: 130,
+            ap: 11,
+            cap: 22,
             status: "",
             game: "",
-            photo: 'assets/images/trilope.png'
+            photo: 'assets/images/planets/trilope.png'
         },
 
     ];
@@ -116,7 +117,7 @@ $(document).ready(function () {
 
 
     // WRITE THE NAMES AND HP OF QUEUED PLANETS TO THEIR SMALL TAGS
-    // CAN THIS BE DONE MORE COMPACTLY?
+    // REFACTOR: HOW CAN THIS BE DONE MORE COMPACTLY?
 
     $("#p0_name").text($planetsArray[0].name);
     $("#p0_hp").text($planetsArray[0].hp);
@@ -143,6 +144,7 @@ $(document).ready(function () {
 
     // INITIALIZE GAME PLAY VARIABLES
     // THESE HAVE TO COME BEFORE THE MESSAGE VARIABLES THAT USE THEM
+    // REFACTOR: ADD WINS AND LOSSES GAME COUNTERS (NOT REQUIRED BY SAMPLE GAME)
 
     // represents the entire array object for the hero planet
     let $hero;
@@ -158,15 +160,14 @@ $(document).ready(function () {
 
 
 
-
+    // INITIAL INSTRUCTIONS MESSAGE TO LOAD ON PAGE LOAD/RELOAD
     let $startMessage = "Choose a world to be your capital.";
-    // display the choose character message on game start
     $("#message_text").text($startMessage);
 
 
-    // START SELF AND ENEMY PLANET SELECTIONS FUNCTION
+    // START HERO AND ENEMY PLANET SELECTIONS FUNCTION
 
-    // when a queued planets class box is clicked
+    // WHEN A PLANET IN THE QUEUE IS CLICKED...
     $(".char_box").click(function (event) {
 
         // loop through all objects in planetArray
@@ -175,60 +176,60 @@ $(document).ready(function () {
             // and when array element object .name matches clicked .char_box's ID...
             if ($planetsArray[i].name === this.id) {
 
-                // if $hero does not have a value (but IS initialized!)
+                // IF THERE IS NO HERO PLANET CHOSEN
                 if (!$hero) {
 
-                    // and make the whole object the value of $hero
+                    // then make the object of the first planet clicked the HERO
                     $hero = $planetsArray[i];
-                    // set that object's .status property to "hero"
+                    // and change that object's .status value to "hero"
                     $hero.status = "hero";
-                    // set that object's .game property to "over"
+                    // and set that object's .game property to "over"
+                    // when all planets' .game property is "over", then game is over
                     $hero.game = "over";
-                    // and .hide THIS element (the clicked list planet)
+                    // and hide this planet's queue icon
                     $(this).hide().attr('id');
-                    // and put .name, .hp, and photo of $hero object into YOUR html divs
+                    // and display this planet in main fight area, above attack button
                     $("#your_hp").text($hero.hp);
                     $("#your_name").text($hero.name);
                     $("#your_photo").attr('src', $hero.photo);
 
+                    // and display the info message to choose an enemy
                     let $chooseEnemy = "Select a world to subdue.";
-                    // and display the message to choose an enemy
                     $("#message_text").text($chooseEnemy);
 
-                    // and console.log the value of $hero
-                    // console.log($hero);
 
-                    // but if $hero DOES have a value already,
-                    // then all subsequent planets clicked will have .status "enemy"
-                } else {
+                    // BUT IF THERE IS A $HERO and NO ENEMY, THEN CHOOSE AN ENEMY
+                    // THIS CONDITIONAL PREVENTS CLICKING THROUGH THE ENEMY LIST
+                    // WITHOUT HAVING TO FIGHT ALL THE ENEMYS
+                } else if ($hero && !$enemy) {
 
+                    // when an enemy is defeated below, the #enemy_box is HIDDEN
+                    // this shows it again when a fresh enemy is selected
                     $("#enemy_box").show();
-                    // and make the whole object the value of the $enemy variable
+                    // make the whole object the value of the $enemy variable
                     $enemy = $planetsArray[i];
                     // set the clicked object's .status property to "enemy"
                     $enemy.status = "enemy";
                     // set that object's .game property to "over"
+                    // when all planets' .game property is "over", then game is over
                     $enemy.game = "over";
-                    // and .hide THIS (the element clicked with class="char_box")
+                    // and hide this planet's queue icon
                     $(this).hide().attr('id');
-                    // and put .name, .hp, and photo of $hero object into ENEMY html divs
+                    // and display this planet in main fight area, below attack button
                     $("#enemy_hp").text($enemy.hp);
                     $("#enemy_name").text($enemy.name);
                     $("#enemy_photo").attr('src', $enemy.photo);
 
-                    let $attackInfo = "Click ATTACK until one world emerges victorious.";
                     // and display the message to start the battle
+                    let $attackInfo = "Click ATTACK until one world emerges victorious.";
                     $("#message_text").text($attackInfo);
-
-                    // and console.log the value of $enemy
-                    // console.log($enemy);
 
                 }
             }
         }
     });
 
-    // END SELF AND ENEMY PLANET SELECTIONS FUNCTION
+    // END HERO AND ENEMY PLANET SELECTIONS FUNCTION
 
 
     // START LIGHTSHOW FUNCTION TO PRODUCE RANDOM LIGHTNING STRIKES
@@ -236,28 +237,36 @@ $(document).ready(function () {
     // function defines a brief lightning show for use by ATTACK button
     function lightshow() {
 
-        // this function calls a single instance of lightning
+        // this function calls a single random instance of lightning
+        // actual array of images is passed in below in lightup() callback
         function lightning(imgAr, path) {
-            path = 'assets/images/'; // default path here
+            // directory location of the lightning images
+            path = 'assets/images/lightning/';
+            // variable to stand for the random number chosen
             let num = Math.floor(Math.random() * imgAr.length);
+            // variable to choose the image from array object with random number
             let img = imgAr[num];
+            // variable to combine the path name with the random chosen image
             let imgStr = path + img;
+            // display the random lightning image in the div overlayed on fight box
             $("#lightning_bolts").attr("src", imgStr);
         }
 
-        // callback function defined as lightning() with boltArray argument
+        // callback function definition 
         let lightup = function () {
+            // lightning() function with lightning images array arg
             lightning(boltArray);
         }
 
-        // a variable to stand for AND IMMEDIATELY CALL lightup() every .1 seconds
+        // a variable to stand for AND CALL lightup() callback every .1 seconds
         let intervalId = setInterval(lightup, 100);
 
-        // then after a 1 second light show (x10 .1sec calls of lightning())
+        // timeout terminates lightup() (x10 .1sec calls of lightning())
         setTimeout(() => {
-            // clearInterval stops the intervalId function
+            // clearInterval stops the intervalId setInterval of lightup() firing
             clearInterval(intervalId);
             // and reset the <img id="lightning_bolts"> src="" to empty
+            // so that the last shown bolt does not stay on screen
             $("#lightning_bolts").attr("src", "");
         }, 1000);
     };
@@ -265,112 +274,145 @@ $(document).ready(function () {
     // END LIGHTSHOW FUNCTION TO PRODUCE RANDOM LIGHTNING STRIKES
 
 
-     // START ATTACK BUTTON GAMEPLAY FUNCTION
+    // START ATTACK BUTTON GAMEPLAY FUNCTION
 
     // when the attack button is clicked
     $("#attack_button").click(function (event) {
 
-
         // loop through all objects in planetArray
         for (let i = 0; i < $planetsArray.length; i++) {
 
-
-            // FUNCTION FOR CHECKING IF ALL ENEMIES DEFEATED (GAME OVER)
-            // checks if the .game property of all array objects is "over"
-            // called by final ELSE IF statement
+            // callback checks to see if all objects .game property is "over",
+            // if true for $planetArray.every(), then game over
             function checkStatus(planet) {
                 return planet.game === "over";
             };
 
-
+            // IF every one of the planets' .game values are NOT "over", then...
             if (!$planetsArray.every(checkStatus)) {
 
+                // if NO HERO and NO ENEMY, display the start info message
                 if (!$enemy && !$hero) {
 
                     $("#message_text").text($startMessage);
 
-
+                    // if there is a HERO, but NO ENEMY, then...
                 } else if (!$enemy) {
 
+                    // show Empty Space Attack message
                     let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
-                    // display the result of the attack
                     $("#message_text").text($noEnemy);
+                    // show lightning strikes
                     lightshow();
 
-
+                    // or if there is an ENEMY but NO HERO, then...
                 } else if (!$hero) {
 
-                    $("#char_bin").hide();
+                    // display the You Have Been Defeated message
                     $noHero = "You have been defeated. Accept your fate. Go home.";
-                    // display the result of the attack
                     $("#message_text").text($noHero);
 
+
+                    // but if none of those above conditions are true, then GAME ON:
                 } else {
 
+                    // increase HERO attack points by original base .ap on each attack
                     $attackPoints = $attackPoints + $hero.ap;
+                    // set ENEMY's counterattack points to the enemy's .cap
                     $counterAttackPoints = $enemy.cap;
+                    // reduce ENEMY's .hp by amount of HERO's increasing attack points
                     $enemy.hp = $enemy.hp - $attackPoints;
+                    // and write ENEMY's updated .hp to their fight area tag
                     $("#enemy_hp").text($enemy.hp);
+                    // reduce HERO's .hp by amount of ENEMY'S counter attack points
                     $hero.hp = $hero.hp - $counterAttackPoints;
+                    // and write HERO's updated .hp to their fight area tag
                     $("#your_hp").text($hero.hp);
 
+                    // composed the attack result message after every attack
                     let $attackResult = "You attacked " + $enemy.name + " for " + $attackPoints + " points of damage. " + $enemy.name + " attacked you for " + $counterAttackPoints + " points of damage. Attack again.";
-                    lightshow();
-                    // display the result of the attack
+                    // and display the attack result message in info message area
                     $("#message_text").text($attackResult);
-                    // return;
+                    // and run the lightning attack lightshow() function
+                    lightshow();
 
+                    // and after each attack and counterattack round...
 
-                    if ($enemy.hp <= 0) {
+                    // IF HERO and ENEMY defeat each other in the same round
+                    if ($hero.hp <= 0 && $enemy.hp <= 0) {
 
-                        let $winMessage = "You have conquered " + $enemy.name + ". Select another world to subdue.";
-                        // display the result of the attack
-                        $("#message_text").text($winMessage);
+                        // hide the HERO box
+                        $("#your_box").hide();
+                        // and hide the ENEMY box
+                        $("#enemy_box").hide();
+                        // and hide all planets in queue
+                        $("#char_bin").hide();
+                        // and compose the Mutually Assured Destruction message
+                        let $MADMessage = "Congratulations. You and " + $enemy.name + " have destroyed each other. Game Over.";
+                        // display the MAD message in the info message area
+                        $("#message_text").text($MADMessage);
+                        // clear the $hero object
+                        $hero = "";
+                        // clear the $enemy object
                         $enemy = "";
+
+
+                        // or, IF ENEMY's .hp are 0 or below...
+                    } else if ($enemy.hp <= 0) {
+
+                        // define the victory message    
+                        let $winMessage = "You have conquered " + $enemy.name + ". Select another world to subdue.";
+                        // and write the victory message to the info message area
+                        $("#message_text").text($winMessage);
+                        // and clear the $enemy object holding variable's value
+                        $enemy = "";
+                        // and run the lightning attack lightshow() function
                         lightshow();
+                        // and hide all items in the main fight area for the ENEMY
+                        // after 1 second, so the lightning can run and finish first
                         setTimeout(() => {
                             $("#enemy_box").hide();
                         }, 1000);
-                        return;
 
+                        // or, IF HERO's .hp are 0 or below...
                     } else if ($hero.hp <= 0) {
 
+                        // hide the HERO's details in the HERO's main fight box
                         $("#your_box").hide();
+                        // hide all the planets in the queue
                         $("#char_bin").hide();
+                        // compose the You Have Been Defeated message
                         let $defeatMessage = "You have been defeated by " + $enemy.name + ". Game Over.";
-                        // display the result of the attack
+                        // display the You Have Been Defeated message in info area
                         $("#message_text").text($defeatMessage);
+                        // clear the $hero object
                         $hero = "";
-                        return;
+                        // remove the ATTACK button, to reveal the RESET button under it
+                        $("#attack_button").remove();
 
-                    } else if ($hero.hp <= 0 && $enemy.hp <= 0) {
-
-                        $("#your_box").hide();
-                        $("#enemy_box").hide();
-                        $("#char_bin").hide();
-                        let $MADMessage = "Congratulations. You and " + $enemy.name + " have destroyed each other. Game Over.";
-                        // display the result of the attack
-                        $("#message_text").text($MADMessage);
-                        $hero = "";
-                        return;
-
+                        // THIS FUNCTION NECESSARY TO STOP RUN-THROUGH ATTACKS
                     } else {
                         return;
                     }
                 }
 
+                // BUT, IF every one of the planets' .game values ARE "over", then...
+                // THE GAME IS OVER
             } else if ($planetsArray.every(checkStatus)) {
 
+                // remove the ATTACK button to reveal the RESET button underneath
                 $("#attack_button").remove();
+                // compose the Conquering Victorious message
                 let $victoryMessage = "You are the lord of your star system. Game Over.";
-                // display the result of the attack
+                // display the Conquering Victorious message in info message area
                 $("#message_text").text($victoryMessage);
-                // $("#restart").text("RESTART");
+                // and run the lightning attack lightshow() function
                 lightshow();
+                // and hide all items in the main fight area for the ENEMY
+                // after 1 second, so the lightning can run and finish first
                 setTimeout(() => {
                     $("#enemy_box").hide();
                 }, 1000);
-                return;
 
             }
         }
@@ -381,12 +423,10 @@ $(document).ready(function () {
 
 
     // WHEN THE GAME ENDS, THE ATTACK BUTTON TURNS INTO A RESTART BUTTON
-
+    // REFACTOR: WILL NEED TO ADJUST WHEN ADDING WINS and LOSSES counters
     $('#reset_button').click(function () {
         location.reload();
-        console.log("I'm a magical butterfly!");
     });
-
 
 
     // END jQUERY FUNCTION FOR SYSTEMLORD (aka Star Wars RPG)
