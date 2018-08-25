@@ -82,6 +82,35 @@ $(document).ready(function () {
 
     ];
 
+    let boltArray = [
+        "L0.gif",
+        "L1.gif",
+        "L2.gif",
+        "L3.gif",
+        "L4.gif",
+        "L5.gif",
+        "L6.gif",
+        "L7.gif",
+        "L8.gif",
+        "L9.gif",
+        "L10.gif",
+    ];
+
+
+    // let bolts = [
+    //     "L0.gif",
+    //     "L1.gif",
+    //     "L2.gif",
+    //     "L3.gif",
+    //     "L4.gif",
+    //     "L5.gif",
+    //     "L6.gif",
+    //     "L7.gif",
+    //     "L8.gif",
+    //     "L9.gif",
+    //     "L10.gif",
+    // ];
+
 
     // WRITE THE NAMES AND HP OF QUEUED PLANETS TO THEIR SMALL TAGS
     // CAN THIS BE DONE MORE COMPACTLY?
@@ -198,10 +227,25 @@ $(document).ready(function () {
 
     // END SELF AND ENEMY PLANET SELECTIONS FUNCTION
 
+
     // START ATTACK BUTTON GAMEPLAY FUNCTION
 
     // when the attack button is clicked
     $("#attack_button").click(function (event) {
+
+
+        // lightning effects go here, before logical decision tree
+
+        function lightning(imgAr, path) {
+            path = 'assets/images/'; // default path here
+            var num = Math.floor(Math.random() * imgAr.length);
+            var img = imgAr[num];
+            var imgStr = path + img;
+            $("#lightning_bolts").attr("src", imgStr);
+        }
+
+
+        // lightning(boltArray);
 
         // loop through all objects in planetArray
         for (let i = 0; i < $planetsArray.length; i++) {
@@ -225,6 +269,8 @@ $(document).ready(function () {
                     let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
                     // display the result of the attack
                     $("#message_text").text($noEnemy);
+                    lightning(boltArray);
+
 
                 } else if (!$hero) {
 
@@ -235,6 +281,7 @@ $(document).ready(function () {
 
                 } else {
 
+                    lightning(boltArray);
                     $attackPoints += $hero.ap;
                     $counterAttackPoints = $enemy.cap;
                     $enemy.hp = $enemy.hp - $attackPoints;
@@ -249,7 +296,11 @@ $(document).ready(function () {
 
                     if ($enemy.hp < 0) {
 
-                        $("#enemy_box").hide();
+                        lightning(boltArray);
+                        setTimeout(() => {
+                            $("#enemy_box").hide();
+                        }, 1000);
+                        
                         let $winMessage = "You have conquered " + $enemy.name + ". Select another world to subdue.";
                         // display the result of the attack
                         $("#message_text").text($winMessage);

@@ -85,6 +85,26 @@
 
 /* START THE FIGHT AREA CONTAINER AND ATTACK BUTTON */
 
+#lightning_box {
+    position: absolute;
+    z-index: 1;
+    float: left;
+    /* background-color: #444; */
+    /* opacity: .5; */
+    height: 630px;
+    width: 315px;
+}
+
+#lightning_bolts {
+    /* position: absolute; */
+    /* z-index: 2; */
+    /* float: left; */
+    /* background-color: pink; */
+    /* opacity: .5; */
+    /* height: 630px; */
+    /* width: 315px; */
+}
+
 #fight_box {
     float: left;
     /* background-color: #444; */
@@ -101,6 +121,8 @@
 }
 
 #attack_area button {
+    position: relative;
+    z-index: 3;
     background-color: #740f0f;
     color: #aaa;
     height: 30px;
