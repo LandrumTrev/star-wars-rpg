@@ -82,34 +82,37 @@ $(document).ready(function () {
 
     ];
 
+
     let boltArray = [
-        "L0.gif",
-        "L1.gif",
-        "L2.gif",
-        "L3.gif",
-        "L4.gif",
-        "L5.gif",
-        "L6.gif",
-        "L7.gif",
-        "L8.gif",
-        "L9.gif",
-        "L10.gif",
+
+        "L01.png",
+        "L02.png",
+        "L03.png",
+        "L04.png",
+        "L05.png",
+        "L06.png",
+        "L07.png",
+        "L08.png",
+        "L09.png",
+        "L10.png",
+        "L11.png",
+        "L12.png",
+        "L13.png",
+        "L14.png",
+        "L15.png",
+        "L16.png",
+        "L17.png",
+        "L18.png",
+        "L19.png",
+        "L20.png",
+        "L21.png",
+        "L22.png",
+        "L23.png",
+        "L24.png",
+        "L25.png",
+        "L26.png",
+
     ];
-
-
-    // let bolts = [
-    //     "L0.gif",
-    //     "L1.gif",
-    //     "L2.gif",
-    //     "L3.gif",
-    //     "L4.gif",
-    //     "L5.gif",
-    //     "L6.gif",
-    //     "L7.gif",
-    //     "L8.gif",
-    //     "L9.gif",
-    //     "L10.gif",
-    // ];
 
 
     // WRITE THE NAMES AND HP OF QUEUED PLANETS TO THEIR SMALL TAGS
@@ -227,15 +230,10 @@ $(document).ready(function () {
 
     // END SELF AND ENEMY PLANET SELECTIONS FUNCTION
 
+    // function defines a brief lightning show for use by ATTACK button
+    function lightshow() {
 
-    // START ATTACK BUTTON GAMEPLAY FUNCTION
-
-    // when the attack button is clicked
-    $("#attack_button").click(function (event) {
-
-
-        // lightning effects go here, before logical decision tree
-
+        // this function calls a single instance of lightning
         function lightning(imgAr, path) {
             path = 'assets/images/'; // default path here
             var num = Math.floor(Math.random() * imgAr.length);
@@ -244,8 +242,36 @@ $(document).ready(function () {
             $("#lightning_bolts").attr("src", imgStr);
         }
 
+        // callback function defined as lightning() with boltArray argument
+        var lightup = function () {
+            lightning(boltArray);
+        }
 
-        // lightning(boltArray);
+        // a variable to stand for AND IMMEDIATELY CALL lightup() every .1 seconds
+        var intervalId = setInterval(lightup, 100);
+
+        // then after a 1 second light show (x10 .1sec calls of lightning())
+        setTimeout(() => {
+            // clearInterval stops the intervalId function
+            clearInterval(intervalId);
+            // and reset the <img id="lightning_bolts"> src="" to empty
+            $("#lightning_bolts").attr("src", "");
+        }, 1000);
+    };
+
+
+    // START ATTACK BUTTON GAMEPLAY FUNCTION
+
+    // when the attack button is clicked
+    $("#attack_button").click(function (event) {
+
+
+
+
+
+        // this calls the 1 second lightning show 
+        // lightshow();
+
 
         // loop through all objects in planetArray
         for (let i = 0; i < $planetsArray.length; i++) {
@@ -269,7 +295,7 @@ $(document).ready(function () {
                     let $noEnemy = "You are attacking empty space. Choose a more substantial opponent.";
                     // display the result of the attack
                     $("#message_text").text($noEnemy);
-                    lightning(boltArray);
+                    lightshow();
 
 
                 } else if (!$hero) {
@@ -281,7 +307,7 @@ $(document).ready(function () {
 
                 } else {
 
-                    lightning(boltArray);
+                    lightshow();
                     $attackPoints += $hero.ap;
                     $counterAttackPoints = $enemy.cap;
                     $enemy.hp = $enemy.hp - $attackPoints;
@@ -296,11 +322,11 @@ $(document).ready(function () {
 
                     if ($enemy.hp < 0) {
 
-                        lightning(boltArray);
+                        lightshow();
                         setTimeout(() => {
                             $("#enemy_box").hide();
                         }, 1000);
-                        
+
                         let $winMessage = "You have conquered " + $enemy.name + ". Select another world to subdue.";
                         // display the result of the attack
                         $("#message_text").text($winMessage);
