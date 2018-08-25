@@ -265,9 +265,14 @@ $(document).ready(function () {
     // END LIGHTSHOW FUNCTION TO PRODUCE RANDOM LIGHTNING STRIKES
 
 
-    // START TURN ATTACK BUTTON INTO RESTART BUTTON
+    // WHEN THE GAME ENDS, THE ATTACK BUTTON TURNS INTO A RESTART BUTTON
+    // RELOADING THE PAGE IS NOT WORKING FOR SOME REASON
 
-    // END TURN ATTACK BUTTON INTO RESTART BUTTON
+    $("#restart").click(function (event) {
+        // $("#attack_button").attr("id", "restart");
+        // $("#restart").text("RESTART");
+        window.location.reload(true);
+    });
 
 
     // START ATTACK BUTTON GAMEPLAY FUNCTION
@@ -371,6 +376,8 @@ $(document).ready(function () {
                 let $victoryMessage = "You are the lord of your star system. Game Over.";
                 // display the result of the attack
                 $("#message_text").text($victoryMessage);
+                $("#attack_button").attr("id", "restart");
+                $("#restart").text("RESTART");
                 return;
 
             }
@@ -379,6 +386,9 @@ $(document).ready(function () {
     });
 
     // END ATTACK BUTTON GAMEPLAY FUNCTION
+
+
+
 
     // END jQUERY FUNCTION FOR SYSTEMLORD (aka Star Wars RPG)
 

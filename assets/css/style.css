@@ -126,12 +126,13 @@
     background-color: #740f0f;
     color: #aaa;
     height: 30px;
-    width: 110px;
+    width: 130px;
+    line-height: 1.7rem;
     text-align: center;
     font-family: system;
     letter-spacing: .3rem;
     border-radius: 1rem;
-    padding-left: 11px;
+    padding-left: 13px;
     box-shadow: 1px 1px 10px rgb(2, 1, 0);
 }
 
