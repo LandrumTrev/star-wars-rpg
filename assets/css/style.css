@@ -22,7 +22,7 @@ CSS styles */
     width: 100vw;
     height: 100vh;
     /* background-color: bisque; */
-    background: url(/assets/images/starfield.jpg);
+    background: url(../images/starfield.jpg);
     padding: 2% 0 2% 0;
 }
 
@@ -163,6 +163,7 @@ CSS styles */
 /* START PLANET TAG STYLES */
 
 /* ID of top large planet (ENEMY) name+hp image overlay container */
+/* REFACTOR: HIDE VISIBLE STYLING WHEN NO PLANET LOADED */
 #enemy_tag {
     box-sizing: border-box;
     width: 170px;
@@ -179,6 +180,7 @@ CSS styles */
 }
 
 /* ID of bottom large planet (HERO) name+hp image overlay container */
+/* REFACTOR: HIDE VISIBLE STYLING WHEN NO PLANET LOADED */
 #your_tag {
     box-sizing: border-box;
     width: 170px;
@@ -208,6 +210,7 @@ CSS styles */
 }
 
 /* ID of top (ENEMY) large planet health points */
+/* REFACTOR: HIDE VISIBLE STYLING WHEN NO PLANET LOADED */
 #enemy_hp {
     position: absolute;
     bottom: 0px;
@@ -217,6 +220,7 @@ CSS styles */
 }
 
 /* ID of bottom (HERO) large planet health points */
+/* REFACTOR: HIDE VISIBLE STYLING WHEN NO PLANET LOADED */
 #your_hp {
     position: absolute;
     bottom: 0px;
