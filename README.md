@@ -9,9 +9,9 @@ simple JavaScript/jQuery RPG (role-playing game)
 
 Each planet has a different level of Health Points which are displayed next to it's name. Each planet also has a different level of Attack Points which are unknown to you until you engage in battle. 
 
-The Attack Points of the planet you choose as your Capital will increase by the amount of its initial Attack Points on each successive attack. The Attack Points of the world you are attacking will remain the same for every attack.
+The Attack Points of the planet you choose as your Capital will increase by the amount of its initial Attack Points on each successive attack. The Attack Points of the Defender world will remain the same for every attack.
 
-Note that when you choose a planet as your capital, it's Attack Points will be different from the Attack Points of that same planet in it's role of defending against your attacks. 
+Note that when you choose a planet as your Capital, it's Attack Points will be different from the Attack Points of that same planet in it's role of Defender. 
 
 You will most likely need to conduct multiple campaigns in order to figure out which planet to choose as your Capital, and in which order you should attack the other planets, in order to be able to subdue them all without your world being defeated in the process.
 
