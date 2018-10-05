@@ -1,7 +1,8 @@
-### "_Star Wars RPG_" jQuery game assignment
-# aka _SystemLord_
-#### © Richard Trevillian, 2018-08-25
+# SystemLord
+simple JavaScript/jQuery RPG (role-playing game)
+#### ©2018 Richard Trevillian
 ##### University of Richmond, Full Stack Web Development Bootcamp
+2018-08-25
 
 [play this game](https://landrumtrev.github.io/star-wars-rpg/)
 
