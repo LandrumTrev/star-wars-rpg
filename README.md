@@ -1,8 +1,6 @@
 # SystemLord
 simple JavaScript/jQuery RPG (role-playing game)
-#### ©2018 Richard Trevillian
-##### University of Richmond, Full Stack Web Development Bootcamp
-2018-08-25
+##### ©2018 Richard Trevillian
 
 [play this game](https://landrumtrev.github.io/star-wars-rpg/)
 
@@ -16,3 +14,5 @@ simple JavaScript/jQuery RPG (role-playing game)
 
 >Follow the instruction prompts in the information message area at the top of the game under the game title. May the Schwartz be with you."
 
+##### University of Richmond, Full Stack Web Development Bootcamp
+##### 2018-08-25
