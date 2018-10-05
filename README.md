@@ -14,5 +14,5 @@ simple JavaScript/jQuery RPG (role-playing game)
 
 >Follow the instruction prompts in the information message area at the top of the game under the game title. May the Schwartz be with you."
 
-##### University of Richmond, Full Stack Web Development Bootcamp
-##### 2018-08-25
+###### University of Richmond, Full Stack Web Development Bootcamp
+###### 2018-08-25
