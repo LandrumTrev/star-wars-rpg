@@ -1,6 +1,8 @@
 # SystemLord
 ##### JavaScript and jQuery RPG (role-playing game)
 
+>Because you didn't get that sparkly space pony when you were 8, as an adult you have legally changed your name to SystemLord and are bent on conquering the planets in your local star system for all eternity, or at least until your parents get back from Aldebaran.
+
 Each planet has a different level of Health Points which are displayed next to it's name. Each planet also has a different level of Attack Points which are unknown to you until you engage in battle. 
 
 The Attack Points of the planet you choose as your Capital will increase by the amount of its initial Attack Points on each successive attack. The Attack Points of the Defender world will remain the same for every attack.
@@ -11,7 +13,6 @@ You will most likely need to conduct multiple campaigns in order to figure out w
 
 Follow the instruction prompts and info in the message area at the top under the game title, and may the Schwartz be with you.
 
->Because you didn't get that sparkly space pony when you were 8, as an adult you have legally changed your name to SystemLord and are bent on conquering the planets in your local star system for all eternity, or at least until your parents get back from Aldebaran.
 
 [play the game: https://landrumtrev.github.io/system-lord/](https://landrumtrev.github.io/system-lord/)
 
