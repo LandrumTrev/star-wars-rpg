@@ -1,0 +1,198 @@
+/* "Star Wars RPG jQuery game" assignment
+aka SystemLord
+© Richard Trevillian, 2018-08-25
+University of Richmond, Full Stack Web Development Bootcamp
+CSS styles */
+
+* {
+    /* border: .1px red solid; */
+}
+
+html {}
+
+body {
+    background: url(../images/starfield.jpg) no-repeat center center fixed;
+    background-size: cover;
+    /* width: 100%; */
+    /* height: 100%; */
+    /* border: .1px red solid; */
+    /* background-color: #740f0f; */
+}
+
+
+/* START DECLARE NATIVE SYSTEM FONTS */
+
+@font-face {
+    font-family: system;
+    font-style: normal;
+    font-weight: 300;
+    src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+}
+
+/* END DECLARE NATIVE SYSTEM FONTS */
+
+
+/* START MAIN AREA CONTAINERS */
+
+#content {
+    /* border: .1px red solid; */
+    /* margin: 10px auto; */
+}
+
+header {
+    /* border: .1px red solid; */
+
+}
+
+#left {
+    /* border: .1px red solid; */
+
+}
+
+#char_bin {
+    /* border: .1px red solid; */
+
+}
+
+/* END MAIN AREA CONTAINERS */
+
+/* START TOP AREA CONTENTS */
+
+#game_title {
+    /* border: .1px red solid; */
+
+}
+
+#message_box {
+    /* border: .1px red solid; */
+
+}
+
+/* END TOP AREA CONTENTS */
+
+/* START LEFT AREA CONTENTS */
+
+#attacker_planet {
+    border: .1px red solid;
+    height: 100px;
+}
+
+#attack_button {
+    border: .1px red solid;
+    height: 100px;
+
+}
+
+#defender_planet {
+    border: .1px red solid;
+    height: 100px;
+
+}
+
+/* END LEFT AREA CONTENTS */
+
+/* START RIGHT AREA CONTENTS */
+
+/* class for the container holding each small planet */
+.char_box {
+    /* box-sizing: border-box; */
+    /* background-color: #222; */
+    /* width: 90px; */
+    /* height: 90px; */
+}
+
+
+
+
+/* START THE RIGHT SIDE COLUMN PLANET CONTAINER QUEUE */
+
+/* class for the container holding each small planet */
+.char_box {
+    /* box-sizing: border-box; */
+    /* background-color: #222; */
+    /* width: 90px; */
+    /* width: 100%; */
+    /* min-height: 0px; */
+    max-height: 220px;
+    /* border: .1px red solid; */
+    /* margin: 0; */
+}
+
+/* class for the img tag of each small planet */
+.character {
+    width: 100%;
+    /* border: .1px red solid; */
+
+}
+
+/* class of tag box for small planets in queue */
+.char_tag {
+    font-family: 'system';
+    font-size: .5rem;
+    letter-spacing: .1rem;
+    position: relative;
+    /* top: 0; */
+    bottom: 35px;
+    opacity: .6;
+    background-color: #444;
+    border: 1px solid white;
+    color: white;
+    padding: 0px 0px 0px 4px;
+    max-width: 120px;
+    margin: 0 auto;
+
+}
+
+/* class of small planets name formatting */
+.char_name {
+    text-align: left;
+    padding: 2px 0px 1px 0px;
+
+}
+
+/* class of small planets health points formatting */
+.char_hp {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 1px 0px 1px 3px;
+    background-color: red;
+}
+
+/* END THE RIGHT SIDE COLUMN PLANET CONTAINER QUEUE */
+
+/* MEDIA QUERIES BELOW */
+
+/* Extra small devices (phones, 575px and down) */
+@media only screen and (max-width: 575px) {
+
+    .char_tag {
+        bottom: 45px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 576px and up) */
+@media only screen and (min-width: 576px) {
+
+    .char_tag {
+        bottom: 60px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    .char_tag {
+        bottom: 80px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+    .char_tag {
+        bottom: 110px;
+    }
+}
+
+/* MEDIA QUERIES ABOVE */
