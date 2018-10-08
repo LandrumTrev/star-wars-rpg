@@ -1,5 +1,4 @@
-// "Star Wars RPG jQuery game" assignment
-// aka SystemLord
+// SystemLord RPG
 // © Richard Trevillian, 2018-08-25
 // University of Richmond, Full Stack Web Development Bootcamp
 // JavaScript (jQuery) code

@@ -1,6 +1,8 @@
 # SystemLord
 ##### JavaScript and jQuery RPG (role-playing game)
 
+JavaScript, jQuery, CSS, HTML, universal system fonts, GitHub. RPG (role-playing game) with randomized attack display graphics keeps score of battles against multiple opponents using Attack Points and Hit Points. User may choose any character as their player.
+
 >Because you didn't get that sparkly space pony when you were 8, as an adult you have legally changed your name to SystemLord and are bent on conquering the planets in your local star system for all eternity, or at least until your parents get back from Aldebaran.
 
 Each planet has a different level of Health Points which are displayed next to it's name. Each planet also has a different level of Attack Points which are unknown to you until you engage in battle. 
