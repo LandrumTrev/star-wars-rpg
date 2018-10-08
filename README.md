@@ -1,5 +1,5 @@
 # SystemLord
-##### JavaScript and jQuery RPG (role-playing game)
+##### Interplanetary battle themed RPG (role-playing game)
 
 JavaScript, jQuery, CSS, HTML, universal system fonts, GitHub. RPG (role-playing game) with randomized attack display graphics keeps score of battles against multiple opponents using Attack Points and Hit Points. User may choose any character as their player.
 
